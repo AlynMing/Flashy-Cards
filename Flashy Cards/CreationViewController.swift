@@ -10,13 +10,17 @@ import UIKit
 
 class CreationViewController: UIViewController {
 
+    @IBOutlet weak var cancelButton: UIBarButtonItem!
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
     
-
+    @IBAction func didTapOnCancel(_ sender: Any) {
+        dismiss(animated: true)
+    }
+    
     /*
     // MARK: - Navigation
 

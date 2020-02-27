@@ -155,8 +155,15 @@
                         <viewLayoutGuide key="safeArea" id="fdV-LH-ceF"/>
                     </view>
                     <navigationItem key="navigationItem" id="zVF-q7-6bY">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="Qwa-Lk-iTp"/>
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="Qwa-Lk-iTp">
+                            <connections>
+                                <action selector="didTapOnCancel:" destination="hXY-B8-8mJ" id="qEi-Hd-EyG"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="didTapOnCancel" destination="Qwa-Lk-iTp" id="LRd-Eq-99z"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CnF-qF-W16" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
