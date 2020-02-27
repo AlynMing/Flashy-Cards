@@ -9,8 +9,9 @@
 import UIKit
 
 class CreationViewController: UIViewController {
-
-    @IBOutlet weak var cancelButton: UIBarButtonItem!
+    
+    var flashcardsController: ViewController!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -20,6 +21,23 @@ class CreationViewController: UIViewController {
     @IBAction func didTapOnCancel(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
+    
+    
+    @IBOutlet weak var question: UITextField!
+    @IBOutlet weak var answer: UITextField!
+    
+    @IBAction func didTapOnDone(_ sender: Any) {
+        
+        let questionText = question.text
+        let answerText = answer.text
+    
+        flashcardsController.updateFlashcard(question: questionText!, answer: answerText!)
+        
+        dismiss(animated: true)
+    }
+    
+   
+    
     
     /*
     // MARK: - Navigation

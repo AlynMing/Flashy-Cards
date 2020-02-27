@@ -54,6 +54,11 @@ class ViewController: UIViewController {
         }
     }
     
+    func updateFlashcard(question: String, answer: String) {
+        frontLabel.text = question
+        backLabel.text = answer
+    }
+    
     @IBAction func didTapOnButton1(_ sender: Any) {
         button1.isHidden = true
     }
