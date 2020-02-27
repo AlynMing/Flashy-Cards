@@ -17,6 +17,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var button2: UIButton!
     @IBOutlet weak var button3: UIButton!
     @IBOutlet weak var button4: UIButton!
+    @IBOutlet weak var plus: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +34,11 @@ class ViewController: UIViewController {
                 button!.clipsToBounds = false
                 button!.layer.cornerRadius = 20.0
         }
+        
+        plus.layer.borderWidth = 3.0
+        plus.layer.borderColor = #colorLiteral(red: 0.581669569, green: 0.8673579097, blue: 0.6975092888, alpha: 1)
+        plus.clipsToBounds = false
+        plus.layer.cornerRadius = 20.0
 
         for label in [frontLabel, backLabel] {
             label!.clipsToBounds = true
