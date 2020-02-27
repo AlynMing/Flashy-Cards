@@ -130,10 +130,10 @@
             </objects>
             <point key="canvasLocation" x="137.68115942028987" y="114.50892857142857"/>
         </scene>
-        <!--View Controller-->
+        <!--Creation View Controller-->
         <scene sceneID="WCH-eH-AIe">
             <objects>
-                <viewController id="hXY-B8-8mJ" sceneMemberID="viewController">
+                <viewController id="hXY-B8-8mJ" customClass="CreationViewController" customModule="Flashy_Cards" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QtW-2I-OEP">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
