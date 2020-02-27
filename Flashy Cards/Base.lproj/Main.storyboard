@@ -154,7 +154,9 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="fdV-LH-ceF"/>
                     </view>
-                    <navigationItem key="navigationItem" id="zVF-q7-6bY"/>
+                    <navigationItem key="navigationItem" id="zVF-q7-6bY">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="Qwa-Lk-iTp"/>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CnF-qF-W16" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
