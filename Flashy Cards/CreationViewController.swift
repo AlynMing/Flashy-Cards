@@ -18,7 +18,7 @@ class CreationViewController: UIViewController {
     }
     
     @IBAction func didTapOnCancel(_ sender: Any) {
-        dismiss(animated: true)
+        dismiss(animated: true, completion: nil)
     }
     
     /*
