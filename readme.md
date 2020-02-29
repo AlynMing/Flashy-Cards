@@ -7,7 +7,8 @@ Simple flashcards app
 
 
 ### App Walk-though
-https://recordit.co/y90y0qyGTV
+Cancel out of creation screen: https://recordit.co/77lfSKgZMN
+Create a new flashcard: https://recordit.co/y90y0qyGTV
 
 ## Required
 - [x] User can open the creation screen
