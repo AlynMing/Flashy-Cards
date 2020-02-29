@@ -19,6 +19,19 @@ class ViewController: UIViewController {
     @IBOutlet weak var button4: UIButton!
     @IBOutlet weak var plus: UIButton!
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        //destination of the segue is the Navigation Controller
+        let navigationController = segue.destination as! UINavigationController
+        
+        //We know the Navigation Controller contains only a Creation View Controller
+        let creationController = navigationController.topViewController as! CreationViewController
+        
+        //set the flashcardsController property to self
+        creationController.flashcardsController = self
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         frontLabel.isHidden = false
