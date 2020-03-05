@@ -70,9 +70,11 @@ class ViewController: UIViewController {
             if button == plus {
                 button!.layer.borderColor = #colorLiteral(red: 0.581669569, green: 0.8673579097, blue: 0.6975092888, alpha: 1)
             }
-            else {
-                button!.layer.borderColor = #colorLiteral(red: 0.6666666865, green: 0.6666666865, blue: 0.6666666865, alpha: 1)
+            else { // prev and next -- disabled colors to start
+                button!.layer.backgroundColor = #colorLiteral(red: 0.9000539184, green: 0.9002049565, blue: 0.9000340104, alpha: 1)
+                button!.layer.borderColor = #colorLiteral(red: 0.9000539184, green: 0.9002049565, blue: 0.9000340104, alpha: 1)
             }
+      
             button!.clipsToBounds = false
             button!.layer.cornerRadius = 20.0
         }
@@ -85,15 +87,40 @@ class ViewController: UIViewController {
         
     }
     @IBAction func didTapOnPrev(_ sender: Any) {
+        //Decrease current index
+        currentIndex = currentIndex - 1
+        
+        //Update labels
+        updateLabels()
+        
+        //Update buttons
+        updateNextPrevButtons()
     }
     
     @IBAction func didTapOnNext(_ sender: Any) {
+        //Increase current index
+        currentIndex = currentIndex + 1
+        
+        //Update labels
+        updateLabels()
+        
+        //Update buttons
+        updateNextPrevButtons()
     }
     
     @IBAction func didTapOnCard(_ sender: Any) {
         for label in [frontLabel, backLabel] {
             label!.isHidden = (!label!.isHidden)
         }
+    }
+    
+    func updateLabels() {
+        // Get current flashcard
+        let currentFlashcard = flashcards[currentIndex]
+        
+        //update labels
+        frontLabel.text = currentFlashcard.question
+        backLabel.text = currentFlashcard.answer
     }
     
     func updateNextPrevButtons() {
@@ -110,13 +137,20 @@ class ViewController: UIViewController {
         } else {
             prevButton.isEnabled = true
         }
+        for button in [prevButton, nextButton] {
+            if (button!.isEnabled) {
+                      button!.layer.backgroundColor = #colorLiteral(red: 0.6666666865, green: 0.6666666865, blue: 0.6666666865, alpha: 1)
+                      button!.layer.borderColor = #colorLiteral(red: 0.6666666865, green: 0.6666666865, blue: 0.6666666865, alpha: 1)
+            } else {
+                      button!.layer.backgroundColor = #colorLiteral(red: 0.9000539184, green: 0.9002049565, blue: 0.9000340104, alpha: 1)
+                      button!.layer.borderColor = #colorLiteral(red: 0.9000539184, green: 0.9002049565, blue: 0.9000340104, alpha: 1)
+            }
+        }
     }
     
     func updateFlashcard(question: String, answer: String) {
         let flashcard = Flashcard(question: question, answer: answer)
-        frontLabel.text = flashcard.question
-        backLabel.text = flashcard.answer
-        
+
         //Adding flashcard in the flashcards array
         flashcards.append(flashcard)
         
@@ -128,6 +162,9 @@ class ViewController: UIViewController {
         
         //Update buttons
         updateNextPrevButtons()
+        
+        //update labels
+        updateLabels()
     }
     
     @IBAction func didTapOnButton1(_ sender: Any) {
