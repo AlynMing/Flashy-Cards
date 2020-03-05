@@ -57,7 +57,16 @@ class ViewController: UIViewController {
         card!.layer.shadowRadius = 15.0
         card!.layer.shadowOpacity = 0.2
         
-        updateFlashcard(question: "What's the capital of Brazil?", answer: "Brasilia")
+        //Read saved flashcards
+        readSavedFlashcards()
+        
+        //Add our initial flashcard if needed
+        if flashcards.count == 0 {
+            updateFlashcard(question: "What's the capital of Brazil?", answer: "Brasilia")
+        } else {
+            updateLabels()
+            updateNextPrevButtons()
+        }
         for button in [button1, button2, button3, button4]  {
                 button!.layer.borderWidth = 3.0
                 button!.layer.borderColor = #colorLiteral(red: 0.6762284636, green: 1, blue: 0.8008129001, alpha: 1)
@@ -114,6 +123,30 @@ class ViewController: UIViewController {
         }
     }
     
+    func readSavedFlashcards() {
+        // Read dictionary array from disk (if any)
+        if let dictionaryArray = UserDefaults.standard.array(forKey: "flashcards") as? [[String: String]] {
+            
+            // Know for sure we have a dictionary array
+            let savedCards = dictionaryArray.map { dictionary -> Flashcard in
+                return Flashcard(question: dictionary["question"]!, answer: dictionary["answer"]!)
+            }
+            
+            //Put all these cards in our flashcards array
+            flashcards.append(contentsOf: savedCards)
+        }
+    }
+    
+    func saveAllFlashcardsToDisk() {
+        //From flashcards array to dictionary array
+        let dictionaryArray = flashcards.map { (card) -> [String: String] in
+                return ["question": card.question, "answer": card.answer]
+        }
+        //Save array on disk using UserDefaults
+        UserDefaults.standard.set(dictionaryArray, forKey: "flashcards")
+        
+        print("Flashcards saved to UserDefaults")
+    }
     func updateLabels() {
         // Get current flashcard
         let currentFlashcard = flashcards[currentIndex]
@@ -165,6 +198,9 @@ class ViewController: UIViewController {
         
         //update labels
         updateLabels()
+        
+        //save flashcards to disk
+        saveAllFlashcardsToDisk()
     }
     
     @IBAction func didTapOnButton1(_ sender: Any) {
