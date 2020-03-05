@@ -8,6 +8,11 @@
 
 import UIKit
 
+struct Flashcard {
+    var question: String
+    var answer: String
+}
+
 class ViewController: UIViewController {
     @IBOutlet weak var backLabel: UILabel!
     @IBOutlet weak var frontLabel: UILabel!
@@ -18,6 +23,16 @@ class ViewController: UIViewController {
     @IBOutlet weak var button3: UIButton!
     @IBOutlet weak var button4: UIButton!
     @IBOutlet weak var plus: UIButton!
+    
+    @IBOutlet weak var prevButton: UIButton!
+    @IBOutlet weak var nextButton: UIButton!
+    
+    //Array to hold our flashcards
+    var flashcards = [Flashcard]()
+    
+    //Current flashcard index
+    var currentIndex = 0
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -41,6 +56,8 @@ class ViewController: UIViewController {
         card!.layer.cornerRadius = 20.0
         card!.layer.shadowRadius = 15.0
         card!.layer.shadowOpacity = 0.2
+        
+        updateFlashcard(question: "What's the capital of Brazil?", answer: "Brasilia")
         for button in [button1, button2, button3, button4]  {
                 button!.layer.borderWidth = 3.0
                 button!.layer.borderColor = #colorLiteral(red: 0.6762284636, green: 1, blue: 0.8008129001, alpha: 1)
@@ -48,10 +65,17 @@ class ViewController: UIViewController {
                 button!.layer.cornerRadius = 20.0
         }
         
-        plus.layer.borderWidth = 3.0
-        plus.layer.borderColor = #colorLiteral(red: 0.581669569, green: 0.8673579097, blue: 0.6975092888, alpha: 1)
-        plus.clipsToBounds = false
-        plus.layer.cornerRadius = 20.0
+        for button in [plus, prevButton, nextButton] {
+            button!.layer.borderWidth = 3.0
+            if button == plus {
+                button!.layer.borderColor = #colorLiteral(red: 0.581669569, green: 0.8673579097, blue: 0.6975092888, alpha: 1)
+            }
+            else {
+                button!.layer.borderColor = #colorLiteral(red: 0.6666666865, green: 0.6666666865, blue: 0.6666666865, alpha: 1)
+            }
+            button!.clipsToBounds = false
+            button!.layer.cornerRadius = 20.0
+        }
 
         for label in [frontLabel, backLabel] {
             label!.clipsToBounds = true
@@ -60,6 +84,11 @@ class ViewController: UIViewController {
 
         
     }
+    @IBAction func didTapOnPrev(_ sender: Any) {
+    }
+    
+    @IBAction func didTapOnNext(_ sender: Any) {
+    }
     
     @IBAction func didTapOnCard(_ sender: Any) {
         for label in [frontLabel, backLabel] {
@@ -67,9 +96,38 @@ class ViewController: UIViewController {
         }
     }
     
+    func updateNextPrevButtons() {
+        //Disable next button
+        if currentIndex == flashcards.count - 1 {
+            nextButton.isEnabled = false
+        } else {
+            nextButton.isEnabled = true
+        }
+        
+        //Disable prev button
+        if currentIndex == 0 {
+            prevButton.isEnabled = false
+        } else {
+            prevButton.isEnabled = true
+        }
+    }
+    
     func updateFlashcard(question: String, answer: String) {
-        frontLabel.text = question
-        backLabel.text = answer
+        let flashcard = Flashcard(question: question, answer: answer)
+        frontLabel.text = flashcard.question
+        backLabel.text = flashcard.answer
+        
+        //Adding flashcard in the flashcards array
+        flashcards.append(flashcard)
+        
+        print("Added new flashcard")
+        print("We now have \(flashcards.count) flashcards")
+        
+        currentIndex = flashcards.count - 1
+        print("Our current index is \(currentIndex)")
+        
+        //Update buttons
+        updateNextPrevButtons()
     }
     
     @IBAction func didTapOnButton1(_ sender: Any) {
@@ -77,7 +135,6 @@ class ViewController: UIViewController {
     }
     
     
-
     @IBAction func didTapOnButton2(_ sender: Any) {
         button2.isHidden = true
     }
