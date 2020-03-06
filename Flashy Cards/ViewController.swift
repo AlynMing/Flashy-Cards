@@ -79,11 +79,6 @@ class ViewController: UIViewController {
             if button == plus {
                 button!.layer.borderColor = #colorLiteral(red: 0.581669569, green: 0.8673579097, blue: 0.6975092888, alpha: 1)
             }
-            else { // prev and next -- disabled colors to start
-                button!.layer.backgroundColor = #colorLiteral(red: 0.9000539184, green: 0.9002049565, blue: 0.9000340104, alpha: 1)
-                button!.layer.borderColor = #colorLiteral(red: 0.9000539184, green: 0.9002049565, blue: 0.9000340104, alpha: 1)
-            }
-      
             button!.clipsToBounds = false
             button!.layer.cornerRadius = 20.0
         }

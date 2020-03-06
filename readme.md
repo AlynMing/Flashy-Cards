@@ -1,9 +1,23 @@
 ## FLASHY CARDS
 
-## Lab 2
+## Lab 3
 
 ### App Description
 Simple flashcards app
+
+### App Walk-though
+https://recordit.co/hIFLL1AlAM
+
+## Required
+- [x] User can browse through multiple flashcards
+- [x] User can re-open the app and see previously created flashcards
+- [x] Push code to GitHub
+## Optional
+- [ ] User can delete a flashcard
+- [ ] User can edit existing flashcard
+- [ ] User can store multiple choice questions
+
+## Lab 2
 
 
 ### App Walk-though
