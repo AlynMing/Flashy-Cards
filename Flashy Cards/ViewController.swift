@@ -35,20 +35,27 @@ class ViewController: UIViewController {
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
         //destination of the segue is the Navigation Controller
         let navigationController = segue.destination as! UINavigationController
         
         //We know the Navigation Controller contains only a Creation View Controller
         let creationController = navigationController.topViewController as! CreationViewController
         
+        creationController.initialQuestion = frontLabel.text
+        creationController.initialAnswer = backLabel.text
+        
         //set the flashcardsController property to self
         creationController.flashcardsController = self
+        
+        //edit
+        creationController.question.text = frontLabel.text
+        creationController.answer.text = backLabel.text
         
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         frontLabel.isHidden = false
         backLabel.isHidden = true
         
