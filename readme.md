@@ -31,7 +31,7 @@ Create a new flashcard: https://recordit.co/y90y0qyGTV
 - [x] Push code to GitHub
 
 ## Optional
-- [ ] User gets an error if they try to create a new flashcard with no question or answer
+- [X] User gets an error if they try to create a new flashcard with no question or answer
 - [ ] User can edit existing flashcard
 - [ ] User can add multiple choice answers in the creation screen
 

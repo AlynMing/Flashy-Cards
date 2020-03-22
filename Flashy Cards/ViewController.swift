@@ -48,8 +48,10 @@ class ViewController: UIViewController {
         creationController.flashcardsController = self
         
         //edit
-        creationController.question.text = frontLabel.text
-        creationController.answer.text = backLabel.text
+        if segue.identifier == "EditSegue" {
+            creationController.question.text = frontLabel.text
+            creationController.answer.text = backLabel.text
+        }
         
     }
     
