@@ -75,6 +75,7 @@ class ViewController: UIViewController {
         } else {
             updateLabels()
             updateNextPrevButtons()
+            updateOptions()
         }
         for button in [button1, button2, button3, button4]  {
                 button!.layer.borderWidth = 3.0
@@ -161,6 +162,28 @@ class ViewController: UIViewController {
         
     }
     
+    func updateOptions() {
+        print("inside updateOptions")
+        let currentFlashcard = flashcards[currentIndex]
+        
+        //Create array of all answers
+        var answers = [String]()
+        answers.append(currentFlashcard.extraAnswerOne)
+        answers.append(currentFlashcard.extraAnswerTwo)
+        answers.append(currentFlashcard.extraAnswerThree)
+        answers.append(currentFlashcard.answer)
+        
+        //Shuffle the array
+        answers.shuffle()
+        
+        //Update answers
+        button1.setTitle(answers[0], for: .normal)
+        button2.setTitle(answers[1], for: .normal)
+        button3.setTitle(answers[2], for: .normal)
+        button4.setTitle(answers[3], for: .normal)
+        
+    }
+    
     func updateNextPrevButtons() {
         //Disable next button
         if currentIndex == flashcards.count - 1 {
@@ -201,6 +224,9 @@ class ViewController: UIViewController {
         
         //Update buttons
         updateNextPrevButtons()
+        
+        //Update options
+        updateOptions()
         
         //update labels
         updateLabels()
