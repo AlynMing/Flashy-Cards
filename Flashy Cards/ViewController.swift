@@ -109,6 +109,9 @@ class ViewController: UIViewController {
         
         //Update buttons
         updateNextPrevButtons()
+        
+        //update answer options
+        updateOptions()
     }
     
     @IBAction func didTapOnNext(_ sender: Any) {
@@ -120,6 +123,9 @@ class ViewController: UIViewController {
         
         //Update buttons
         updateNextPrevButtons()
+        
+        //update answer options
+        updateOptions()
     }
     
     @IBAction func didTapOnCard(_ sender: Any) {
