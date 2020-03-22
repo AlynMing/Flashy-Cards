@@ -27,6 +27,11 @@ class CreationViewController: UIViewController {
     
     @IBOutlet weak var question: UITextField!
     @IBOutlet weak var answer: UITextField!
+    
+    @IBOutlet weak var extraAnswer1: UITextField!
+    @IBOutlet weak var extraAnswer2: UITextField!
+    @IBOutlet weak var extraAnswer3: UITextField!
+    
     var initialQuestion: String?
     var initialAnswer: String?
     
@@ -34,6 +39,9 @@ class CreationViewController: UIViewController {
         
         let questionText = question.text
         let answerText = answer.text
+        let extraText1 = extraAnswer1.text
+        let extraText2 = extraAnswer2.text
+        let extraText3 = extraAnswer3.text
         
         if (questionText == nil || answerText == nil || questionText!.isEmpty || answerText!.isEmpty) {
             //show error message
@@ -43,7 +51,7 @@ class CreationViewController: UIViewController {
             present(alert, animated:true)
         }
         else {
-            flashcardsController.updateFlashcard(question: questionText!, answer: answerText!)
+            flashcardsController.updateFlashcard(question: questionText!, answer: answerText!, extraAnswer1: extraText1!, extraAnswer2: extraText2!, extraAnswer3: extraText3!)
             dismiss(animated: true)
         }
     
