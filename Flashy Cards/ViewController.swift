@@ -284,5 +284,25 @@ class ViewController: UIViewController {
             button.isHidden = true
         }
     }
+    
+    @IBAction func didTapOnDelete(_ sender: Any) {
+        
+        //Show confirmation
+        let alert = UIAlertController(title: "Delete flashcard", message: "Are you sure you want to delete this flashcard?", preferredStyle: .actionSheet)
+        
+        //Create delete and cancel actions
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { action in self.deleteCurrentFlashcard() }
+        alert.addAction(deleteAction)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        alert.addAction(cancelAction)
+        
+        //present alert controller
+        present(alert, animated: true)
+    }
+    
+    func deleteCurrentFlashcard() {
+        
+    }
+    
 }
 
