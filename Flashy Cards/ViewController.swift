@@ -104,28 +104,38 @@ class ViewController: UIViewController {
         //Decrease current index
         currentIndex = currentIndex - 1
         
-        //Update labels
-        updateLabels()
+        //update elements of screen that change when there is a new flashcard
+        updateAfterFlashcardChange()
         
-        //Update buttons
-        updateNextPrevButtons()
-        
-        //update answer options
-        updateOptions()
     }
     
     @IBAction func didTapOnNext(_ sender: Any) {
         //Increase current index
         currentIndex = currentIndex + 1
         
+        //update elements of screen that change when there is a new flashcard
+        updateAfterFlashcardChange()
+    }
+    
+    func updateAfterFlashcardChange() {
         //Update labels
-        updateLabels()
-        
-        //Update buttons
-        updateNextPrevButtons()
-        
-        //update answer options
-        updateOptions()
+         updateLabels()
+         
+         //Update buttons
+         updateNextPrevButtons()
+         
+         //update answer options
+         updateOptions()
+         
+         //update option borders
+         for button in [button1, button2, button3, button4] {
+             button?.isHidden = false
+             button?.layer.borderColor = #colorLiteral(red: 0.6762284636, green: 1, blue: 0.8008129001, alpha: 1)
+         }
+         
+         //flip flashcard back
+         frontLabel.isHidden = false
+         backLabel.isHidden = true
     }
     
     @IBAction func didTapOnCard(_ sender: Any) {
@@ -188,6 +198,8 @@ class ViewController: UIViewController {
         button3.setTitle(answers[2], for: .normal)
         button4.setTitle(answers[3], for: .normal)
         
+        
+        
     }
     
     func updateNextPrevButtons() {
@@ -213,6 +225,8 @@ class ViewController: UIViewController {
                       button!.layer.borderColor = #colorLiteral(red: 0.9000539184, green: 0.9002049565, blue: 0.9000340104, alpha: 1)
             }
         }
+        
+        updateOptions()
     }
     
     func updateFlashcard(question: String, answer: String, extraAnswer1: String, extraAnswer2: String, extraAnswer3: String) {
@@ -242,23 +256,33 @@ class ViewController: UIViewController {
     }
     
     @IBAction func didTapOnButton1(_ sender: Any) {
-        button1.isHidden = true
+        updateButton(button: button1)
     }
     
     
     @IBAction func didTapOnButton2(_ sender: Any) {
-        button2.isHidden = true
+        updateButton(button: button2)
     }
     
     @IBAction func didTapOnButton3(_ sender: Any) {
-        frontLabel.isHidden = true
-        backLabel.isHidden = false
-        button3.layer.borderColor = #colorLiteral(red: 0.8820998073, green: 0.6899847984, blue: 1, alpha: 1)
+        updateButton(button: button3)
         
     }
     
     @IBAction func didTapOnButton4(_ sender: Any) {
-        button4.isHidden = true
+        updateButton(button: button4)
+    }
+    
+    func updateButton(button: UIButton) {
+        let currentFlashcard = flashcards[currentIndex]
+        if button.titleLabel!.text == currentFlashcard.answer {
+             frontLabel.isHidden = true
+             backLabel.isHidden = false
+             button.layer.borderColor = #colorLiteral(red: 0.8820998073, green: 0.6899847984, blue: 1, alpha: 1)
+         }
+        else {
+            button.isHidden = true
+        }
     }
 }
 
