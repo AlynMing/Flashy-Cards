@@ -44,14 +44,19 @@ class CreationViewController: UIViewController {
         let extraText3 = extraAnswer3.text
         
         if (questionText == nil || answerText == nil || questionText!.isEmpty || answerText!.isEmpty) {
-            //show error message
+            // Show error message
             let alert = UIAlertController(title: "Missing text", message: "You need to enter both a question and an answer", preferredStyle: .alert)
             let okAction = UIAlertAction(title: "Ok", style: .default)
             alert.addAction(okAction)
             present(alert, animated:true)
         }
         else {
-            flashcardsController.updateFlashcard(question: questionText!, answer: answerText!, extraAnswer1: extraText1!, extraAnswer2: extraText2!, extraAnswer3: extraText3!)
+            // See if it's existing
+            var isExisting = false
+            if initialQuestion != nil {
+                isExisting = true
+            }
+            flashcardsController.updateFlashcard(question: questionText!, answer: answerText!, extraAnswer1: extraText1!, extraAnswer2: extraText2!, extraAnswer3: extraText3!, isExisting: isExisting)
             flashcardsController.updateAfterFlashcardChange()
             dismiss(animated: true)
         }
