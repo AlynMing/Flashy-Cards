@@ -18,6 +18,9 @@ class CreationViewController: UIViewController {
         // Do any additional setup after loading the view.
         question.text = initialQuestion
         answer.text = initialAnswer
+        extraAnswer1.text = initialExtraAnswer1
+        extraAnswer2.text = initialExtraAnswer2
+        extraAnswer3.text = initialExtraAnswer3
     }
     
     @IBAction func didTapOnCancel(_ sender: Any) {
@@ -34,6 +37,9 @@ class CreationViewController: UIViewController {
     
     var initialQuestion: String?
     var initialAnswer: String?
+    var initialExtraAnswer1: String?
+    var initialExtraAnswer2: String?
+    var initialExtraAnswer3: String?
     
     @IBAction func didTapOnDone(_ sender: Any) {
         
@@ -42,10 +48,8 @@ class CreationViewController: UIViewController {
         let extraText1 = extraAnswer1.text
         let extraText2 = extraAnswer2.text
         let extraText3 = extraAnswer3.text
-        
-        if (questionText == nil || answerText == nil || questionText!.isEmpty || answerText!.isEmpty) {
-            // Show error message
-            let alert = UIAlertController(title: "Missing text", message: "You need to enter both a question and an answer", preferredStyle: .alert)
+        if invalidInput(questionText: questionText, answerText: answerText, extraText1: extraText1, extraText2: extraText2, extraText3: extraText3) {
+            let alert = UIAlertController(title: "Missing text", message: "All fields must be entered", preferredStyle: .alert)
             let okAction = UIAlertAction(title: "Ok", style: .default)
             alert.addAction(okAction)
             present(alert, animated:true)
@@ -62,6 +66,21 @@ class CreationViewController: UIViewController {
         }
     
        
+    }
+    
+    func invalidInput(questionText: String?, answerText: String?, extraText1: String?, extraText2: String?, extraText3: String?) -> Bool {
+        let answers = [questionText, answerText, extraText1, extraText2, extraText3]
+        if Array(Set(answers)) != Array(answers) {
+            //all elements not unique
+            return false
+        }
+        for text in answers {
+            if text == nil || text!.isEmpty {
+                
+                return true
+            }
+        }
+        return false
     }
     
    

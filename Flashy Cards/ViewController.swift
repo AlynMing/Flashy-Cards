@@ -37,7 +37,17 @@ class ViewController: UIViewController {
     //Current flashcard index
     var currentIndex = 0
     
-    
+    func getWrongAnswers(button1: UIButton, button2: UIButton, button3: UIButton, button4: UIButton ) -> Array<String> {
+        let currentFlashcard = flashcards[currentIndex]
+        var result = [String]()
+        for button in [button1, button2, button3, button4] {
+            let answer = button.titleLabel!.text
+            if answer != currentFlashcard.answer {
+                result.append(answer ?? "error")
+            }
+        }
+        return result
+    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         //destination of the segue is the Navigation Controller
         let navigationController = segue.destination as! UINavigationController
@@ -52,6 +62,12 @@ class ViewController: UIViewController {
         if segue.identifier == "EditSegue" {
             creationController.initialQuestion = frontLabel.text
             creationController.initialAnswer = backLabel.text
+            let wrongAnswers = getWrongAnswers(button1: button1, button2: button2, button3: button3, button4: button4)
+            creationController.initialExtraAnswer1 = wrongAnswers[0]
+            creationController.initialExtraAnswer2 = wrongAnswers[1]
+            creationController.initialExtraAnswer3 = wrongAnswers[2]
+            
+            
         }
         
     }
@@ -83,15 +99,6 @@ class ViewController: UIViewController {
                 button!.layer.borderColor = #colorLiteral(red: 0.6762284636, green: 1, blue: 0.8008129001, alpha: 1)
                 button!.clipsToBounds = false
                 button!.layer.cornerRadius = 20.0
-        }
-        
-        for button in [plus, prevButton, nextButton] {
-            button!.layer.borderWidth = 3.0
-            if button == plus {
-                button!.layer.borderColor = #colorLiteral(red: 0.581669569, green: 0.8673579097, blue: 0.6975092888, alpha: 1)
-            }
-            button!.clipsToBounds = false
-            button!.layer.cornerRadius = 20.0
         }
 
         for label in [frontLabel, backLabel] {
@@ -140,6 +147,10 @@ class ViewController: UIViewController {
     }
     
     @IBAction func didTapOnCard(_ sender: Any) {
+        flipFlashcard()
+    }
+    
+    func flipFlashcard() {
         for label in [frontLabel, backLabel] {
             label!.isHidden = (!label!.isHidden)
         }
