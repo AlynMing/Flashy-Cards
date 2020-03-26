@@ -121,8 +121,9 @@ class ViewController: UIViewController {
         //Increase current index
         currentIndex = currentIndex + 1
         
-        //update elements of screen that change when there is a new flashcard
-        updateAfterFlashcardChange()
+        //flashcard change
+        animateCardOut()
+
     }
     
     func updateAfterFlashcardChange() {
@@ -151,9 +152,34 @@ class ViewController: UIViewController {
     }
     
     func flipFlashcard() {
-        for label in [frontLabel, backLabel] {
-            label!.isHidden = (!label!.isHidden)
+        UIView.transition(with: card, duration: 0.3, options: .transitionFlipFromRight, animations: {
+            for label in [self.frontLabel, self.backLabel] {
+                label!.isHidden = (!label!.isHidden)
+            }
+        })
+
+    }
+    
+    func animateCardOut() {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.card.transform = CGAffineTransform.identity.translatedBy(x: -300.0, y: 0.0)
+        }) { (finished) in
+            // Update elements of screen that change when there is a new flashcard
+            self.updateAfterFlashcardChange()
+            
+            // Run other animation
+            self.animateCardIn()
         }
+    }
+    
+    func animateCardIn() {
+        // Start on the right side (don't animate this)
+        card.transform = CGAffineTransform.identity.translatedBy(x: 300.0, y: 0.0)
+        
+        //Animate card going back to its original position
+        UIView.animate(withDuration: 0.3, animations: {
+            self.card.transform = CGAffineTransform.identity
+        })
     }
     
     func readSavedFlashcards() {
@@ -223,15 +249,6 @@ class ViewController: UIViewController {
             prevButton.isEnabled = false
         } else {
             prevButton.isEnabled = true
-        }
-        for button in [prevButton, nextButton] {
-            if (button!.isEnabled) {
-                      button!.layer.backgroundColor = #colorLiteral(red: 0.6666666865, green: 0.6666666865, blue: 0.6666666865, alpha: 1)
-                      button!.layer.borderColor = #colorLiteral(red: 0.6666666865, green: 0.6666666865, blue: 0.6666666865, alpha: 1)
-            } else {
-                      button!.layer.backgroundColor = #colorLiteral(red: 0.9000539184, green: 0.9002049565, blue: 0.9000340104, alpha: 1)
-                      button!.layer.borderColor = #colorLiteral(red: 0.9000539184, green: 0.9002049565, blue: 0.9000340104, alpha: 1)
-            }
         }
         
         updateOptions()
