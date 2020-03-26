@@ -109,40 +109,39 @@ class ViewController: UIViewController {
         
     }
     @IBAction func didTapOnPrev(_ sender: Any) {
-        //Decrease current index
+        // Decrease current index
         currentIndex = currentIndex - 1
         
-        //update elements of screen that change when there is a new flashcard
-        updateAfterFlashcardChange()
-        
+        // Flashcard change
+        animateCardOut(next: false)
     }
     
     @IBAction func didTapOnNext(_ sender: Any) {
-        //Increase current index
+        // Increase current index
         currentIndex = currentIndex + 1
         
-        //flashcard change
-        animateCardOut()
+        // Flashcard change
+        animateCardOut(next: true)
 
     }
     
     func updateAfterFlashcardChange() {
-        //Update labels
+         // Update labels
          updateLabels()
          
-         //Update buttons
+         // Update buttons
          updateNextPrevButtons()
          
-         //update answer options
+         // Update answer options
          updateOptions()
          
-         //update option borders
+         // Update option borders
          for button in [button1, button2, button3, button4] {
              button?.isHidden = false
              button?.layer.borderColor = #colorLiteral(red: 0.6762284636, green: 1, blue: 0.8008129001, alpha: 1)
          }
          
-         //flip flashcard back
+         // Flip flashcard back
          frontLabel.isHidden = false
          backLabel.isHidden = true
     }
@@ -160,21 +159,31 @@ class ViewController: UIViewController {
 
     }
     
-    func animateCardOut() {
+    func animateCardOut(next: Bool) {
         UIView.animate(withDuration: 0.3, animations: {
-            self.card.transform = CGAffineTransform.identity.translatedBy(x: -300.0, y: 0.0)
+            if (next) {
+                self.card.transform = CGAffineTransform.identity.translatedBy(x: -300.0, y: 0.0)
+            }
+            else {
+                self.card.transform = CGAffineTransform.identity.translatedBy(x: 300.0, y: 0.0)
+            }
         }) { (finished) in
             // Update elements of screen that change when there is a new flashcard
             self.updateAfterFlashcardChange()
             
             // Run other animation
-            self.animateCardIn()
+            self.animateCardIn(next: next)
         }
     }
     
-    func animateCardIn() {
-        // Start on the right side (don't animate this)
-        card.transform = CGAffineTransform.identity.translatedBy(x: 300.0, y: 0.0)
+    func animateCardIn(next: Bool) {
+        // Start on the correct side (don't animate this)
+        if (next) {
+            card.transform = CGAffineTransform.identity.translatedBy(x: 300.0, y: 0.0)
+        }
+        else {
+            card.transform = CGAffineTransform.identity.translatedBy(x: -300.0, y: 0.0)
+        }
         
         //Animate card going back to its original position
         UIView.animate(withDuration: 0.3, animations: {
