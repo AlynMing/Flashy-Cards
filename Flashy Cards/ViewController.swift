@@ -108,6 +108,30 @@ class ViewController: UIViewController {
 
         
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // First start with the flashcard invisible and slightly smaller in size
+        card.alpha = 0.0
+        card.transform = CGAffineTransform.identity.scaledBy(x: 0.75, y: 0.75)
+        
+        // Do same for buttons
+        for button in [button1, button2, button3, button4] {
+            button!.alpha = 0.0
+            button!.transform = CGAffineTransform.identity.scaledBy(x: 0.75, y: 0.75)
+        }
+        
+        // Animation
+        UIView.animate(withDuration: 0.6, delay: 0.5, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: [], animations: {
+            self.card.alpha = 1.0
+            self.card.transform = CGAffineTransform.identity
+            for button in [self.button1, self.button2, self.button3, self.button4] {
+                button!.alpha = 1.0
+                button!.transform = CGAffineTransform.identity
+            }
+        })
+    }
     @IBAction func didTapOnPrev(_ sender: Any) {
         // Decrease current index
         currentIndex = currentIndex - 1
